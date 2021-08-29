@@ -1,0 +1,97 @@
+<!Doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+
+    <title>blog on React </title>
+    <meta name="description" content="HTML5">
+    <meta name="Maciej_Marosz" content="IT POL">
+
+
+    <link rel="shortcut icon" href="#">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+ </head>	
+	
+<body> 
+	<script type="text/babel">
+	
+	
+	 
+	class Post extends React.Component 
+	 {
+	  constructor(props){
+		super(props);
+		this.state = {
+			showContent: false
+		}
+	  }
+	  showMoreContent () {
+		this.setState({showContent: true});	
+	  }
+	  render(){
+		  return (
+			  <div>
+				<h2>{this.props.title}</h2>
+				{ this.state.showContent ? (  
+					   <p>{this.props.content}</p>
+					   ) : (
+				             <>
+				               <p>{this.props.shortContent}</p>
+				               <button onClick ={()=>this.showMoreContent()} >Read more</button>        
+							 </>
+					 )
+				}
+		    <hr/>
+			</div>
+		);
+		}
+	}
+	
+    const Blog = function() {
+			const posts = [
+			 {
+				title:"planet Mars",
+				shortContent:"Very hot planet",
+				content:"There are hot temperatures, clouds and storms",
+				id:2
+			 },
+			 {
+				title:"planet Venus",
+				shortContent:"Incredibly hot planet",
+				content:"It is so near Solar, that heat smells all materials",		
+				id:3
+			 }
+			];
+			
+			const postsList = posts.map( el => ( 
+						    <Post 
+							  key={el.id}
+							  {...el}
+							 />
+						  )
+						);
+		
+            return(
+		
+				<div>
+					
+					<h1>all This is my blog about cosmos</h1> 
+					{postsList}
+				</div>
+	 )
+	}
+	ReactDOM.render(
+		<Blog/>
+		, document.getElementById('root'));
+
+
+	
+	
+	</script>
+
+	<div id='root'></div>
+</body>
+</html>
